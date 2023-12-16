@@ -1,25 +1,10 @@
 ﻿
 using BosApi;
 
-Console.WriteLine("===========INIT APP==============");
+var client = new BosClient("erCPHeVMzLLGSG9He/o8cgNCk2qg1S6BxaF37KaoIAY=");
 
-var client = new BosClient("qqF2gAiGAcVg/0E5pafuLDjWxpd457P00Ry99m03kUA=");
+var responseRead = await client.ReadSecret("562cefa5-0b0c-40e9-a3dd-f8739b641336", true);
 
-var response = await client.ReadSecret("a0229f3e-2ac6-46d8-b8f0-7f4819963438");
-
-if (response.IsSuccess)
-{
-    Console.WriteLine("=========Секрет успешно получен============");
-    Console.WriteLine("Название: " + response.Data.Title);
-    Console.WriteLine("Логин: " + response.Data.ELogin);
-    Console.WriteLine("Пароль: " + response.Data.EPw);
-    Console.WriteLine("Секрет: " + response.Data.ESecret);
-}
-else
-{
-    Console.WriteLine("==========Ошибка получения секрета==============");
-    foreach (var er in response.ErrorList)
-    {
-        Console.WriteLine(er);
-    }
-}
+Console.WriteLine("Логин: " + responseRead.Data.ELogin);
+Console.WriteLine("Пароль: " + responseRead.Data.EPw);
+Console.WriteLine("Секрет: " + responseRead.Data.ESecret);
